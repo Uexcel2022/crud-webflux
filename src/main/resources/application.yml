@@ -1,0 +1,10 @@
+spring:
+  r2dbc:
+     url: r2dbc:pool:mysql://localhost:3360/product?serverTimezone=UTC+1
+     username: root
+     password: jvman19
+  webflux:
+    problem details:
+      enabled: true
+
+

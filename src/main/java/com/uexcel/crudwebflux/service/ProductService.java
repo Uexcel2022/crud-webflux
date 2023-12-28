@@ -8,8 +8,7 @@ public interface ProductService {
     Flux<ProductDto> getAllProduct();
     Mono<ProductDto> getProductById(Long id);
 
-    Flux<ProductDto> getRangeByPrice(Mono<Double> min, double max);
-
+    public Flux<ProductDto> getRangeByPrice(double min, double max);
     Mono<ProductDto> saveProduct(Mono<ProductDto> productDto);
 
     Mono<ProductDto> upDateProduct(Mono<ProductDto> productDto, Long id);

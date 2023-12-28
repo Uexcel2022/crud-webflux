@@ -6,6 +6,7 @@ import com.uexcel.crudwebflux.repository.ProductRepository;
 import com.uexcel.crudwebflux.utils.AppUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Range;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -30,15 +31,12 @@ public class ProductServiceImp implements ProductService{
     }
 
     @Override
-    public Flux<ProductDto> getRangeByPrice(Mono<Double> min, double max) {
+    public Flux<ProductDto> getRangeByPrice(double min, double max) {
         return productRepository.findByPriceBetween(min,max);
     }
 
     @Override
     public Mono<ProductDto> saveProduct(Mono<ProductDto> productDto) {
-        Product product = new Product();
-//        BeanUtils.copyProperties(productDto,product);
-//        return productRepository.save(product).map(AppUtil::entityToDto);
       return   productDto.map(AppUtil::DtoToEntity)
                 .flatMap(productRepository::save)
                 .map(AppUtil::entityToDto);
