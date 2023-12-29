@@ -2,7 +2,6 @@ package com.uexcel.crudwebflux.controller;
 
 import com.uexcel.crudwebflux.dto.ProductDto;
 import com.uexcel.crudwebflux.service.ProductService;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -23,7 +22,6 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public  Mono<ProductDto> getProductById(@PathVariable("id") Long id){
-        System.out.println("**************************************************************"+id);
         return productService.getProductById(id);
     }
 
@@ -32,15 +30,20 @@ public class ProductController {
         return  productService.getAllProduct();
     }
 
-    @PostMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public Mono<ProductDto> updateProduct(
             @RequestBody Mono<ProductDto> productDtoMono , @PathVariable Long id ){
-        return productService.upDateProduct(productDtoMono, id);
+        return productService.updateProduct(productDtoMono, id);
     }
 
     @GetMapping("/price")
     public Flux<ProductDto> getRangeOfProductByPrice(
             @RequestParam("min") Double min, @RequestParam("max") Double max){
         return productService.getRangeByPrice(min,max);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    private Mono<Void> deleteProduct(@PathVariable("id") Long id){
+        return productService.deleteProduct(id);
     }
 }

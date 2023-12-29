@@ -1,10 +1,18 @@
 spring:
   r2dbc:
-     url: r2dbc:pool:mysql://localhost:3360/product?serverTimezone=UTC+1
+     url: r2dbc:pool:mysql://localhost:3306/product
      username: root
      password: jvman19
   webflux:
     problem details:
       enabled: true
+
+
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          r2dbc=DEBUG:
 
 

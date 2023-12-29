@@ -1,12 +1,8 @@
 package com.uexcel.crudwebflux.service;
 
 import com.uexcel.crudwebflux.dto.ProductDto;
-import com.uexcel.crudwebflux.entity.Product;
 import com.uexcel.crudwebflux.repository.ProductRepository;
 import com.uexcel.crudwebflux.utils.AppUtil;
-import org.springframework.beans.BeanUtils;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.domain.Range;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -43,7 +39,7 @@ public class ProductServiceImp implements ProductService{
     }
 
     @Override
-    public Mono<ProductDto> upDateProduct(Mono<ProductDto> productDto, Long id){
+    public Mono<ProductDto> updateProduct(Mono<ProductDto> productDto, Long id){
       return   productRepository.findById(id)
               .flatMap(p->productDto.map(AppUtil::DtoToEntity)
                 .doOnNext(i->i.setId(id)))
